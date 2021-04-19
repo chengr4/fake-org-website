@@ -1,8 +1,66 @@
 {
-  "login-user": [{
-    "id": 1,
-    "email": "admin@test.com",
-    "password": "password123"
-  }],
-  "organizations": []
+  "users": [
+    {
+      "email": "admin@test.com",
+      "password": "password123",
+      "id": 1
+    }
+  ],
+  "organizations": [
+    {
+      "name": "eeeeeee",
+      "address": {
+        "street": "fafaf",
+        "apt": "asf",
+        "city": "rgrgr",
+        "state": "wafrgea",
+        "zipcode": "4325435"
+      },
+      "id": 1
+    },
+    {
+      "name": "qew",
+      "address": {
+        "street": "rr",
+        "apt": "dd",
+        "city": "jj",
+        "state": "xx",
+        "zipcode": "333"
+      },
+      "id": 2
+    },
+    {
+      "name": "qew",
+      "address": {
+        "street": "rr",
+        "apt": "dd",
+        "city": "jj",
+        "state": "xx",
+        "zipcode": "333"
+      },
+      "id": 3
+    },
+    {
+      "name": "fff",
+      "address": {
+        "street": "eee",
+        "apt": "gege",
+        "city": "nxbvx",
+        "state": "gtrs",
+        "zipcode": "5462"
+      },
+      "id": 4
+    },
+    {
+      "name": "fesafea",
+      "address": {
+        "street": "feaf",
+        "apt": "fea",
+        "city": "feaf",
+        "state": "feaef",
+        "zipcode": "feaf"
+      },
+      "id": "22824bfc-2e49-4508-bf28-06621d52a607"
+    }
+  ]
 }
