@@ -68,3 +68,16 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `yarn build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## How to use the project?
+
+### Step 1
+
+## Questions
+
+1. not sure if the way of wrapping botton is proper [1]
+
+## References
+
+[1] [React Material UI + Router redirect button](https://stackoverflow.com/questions/55796665/react-material-ui-router-redirect-button)
+[2] [Cross-Origin Request Blocked with React and Express](https://stackoverflow.com/questions/50968152/cross-origin-request-blocked-with-react-and-express)
