@@ -1,104 +1,60 @@
-import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
-
-// Generate Order Data
-function createData(id, date, name, shipTo, paymentMethod, amount) {
-  return { id, date, name, shipTo, paymentMethod, amount };
-}
-
-const rows = [
-  createData(
-    0,
-    "16 Mar, 2019",
-    "Elvis Presley",
-    "Tupelo, MS",
-    "VISA ⠀•••• 3719",
-    312.44
-  ),
-  createData(
-    1,
-    "16 Mar, 2019",
-    "Paul McCartney",
-    "London, UK",
-    "VISA ⠀•••• 2574",
-    866.99
-  ),
-  createData(
-    2,
-    "16 Mar, 2019",
-    "Tom Scholz",
-    "Boston, MA",
-    "MC ⠀•••• 1253",
-    100.81
-  ),
-  createData(
-    3,
-    "16 Mar, 2019",
-    "Michael Jackson",
-    "Gary, IN",
-    "AMEX ⠀•••• 2000",
-    654.39
-  ),
-  createData(
-    4,
-    "15 Mar, 2019",
-    "Bruce Springsteen",
-    "Long Branch, NJ",
-    "VISA ⠀•••• 5919",
-    212.79
-  ),
-];
-
-function preventDefault(event) {
-  event.preventDefault();
-}
+import Container from "@material-ui/core/Container";
+import OrganizationList from "../components/OrganizationList";
+import Button from "@material-ui/core/Button";
+import axios from "axios";
+import Navbar from "../components/Navbar";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
-  seeMore: {
-    marginTop: theme.spacing(3),
+  organizations: {
+    display: "flex",
+    flexDirection: "column",
+    minHeight: "100vh",
   },
 }));
 
 const OrganizationsPage = () => {
+  const [isPending, setIsPending] = useState(true);
+  const [organizations, setOrganizations] = useState([]);
+
   const classes = useStyles();
 
-  const [isPending, setIsPending] = useState(false);
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/api/organizations")
+      .then((res) => {
+        return res.data;
+      })
+      .then((data) => {
+        setIsPending(false);
+        setOrganizations(data);
+      })
+      .catch(function (error) {
+        // handle error
+        setIsPending(false);
+        console.log(error);
+      });
+  }, []);
 
   return (
-    <React.Fragment>
+    <Container className={classes.organizations}>
+      <Navbar path="organizations" />
       <Typography component="h2" variant="h6" color="primary" gutterBottom>
         Organizations
       </Typography>
-      <Table size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell>Date</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Ship To</TableCell>
-            <TableCell>Payment Method</TableCell>
-            <TableCell align="right">Sale Amount</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell>{row.date}</TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.shipTo}</TableCell>
-              <TableCell>{row.paymentMethod}</TableCell>
-              <TableCell align="right">{row.amount}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </React.Fragment>
+      <Button component={Link} to="/registration" variant="contained">
+        CREACTE NEW ACCOUNT
+      </Button>
+      {isPending && (
+        <Typography component="h2" variant="h6" color="secondary" gutterBottom>
+          Loading...
+        </Typography>
+      )}
+      {organizations && <OrganizationList organizations={organizations} />}
+    </Container>
   );
 };
 

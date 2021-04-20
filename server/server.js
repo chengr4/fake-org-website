@@ -1,16 +1,8 @@
-/*if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config()
-}*/
-
 const express = require("express");
 const app = express();
 const bcrypt = require("bcrypt");
 const cors = require("cors");
 const lodashId = require("lodash-id");
-// const passport = require('passport')
-// const flash = require('express-flash')
-// const session = require('express-session')
-// const methodOverride = require('method-override')
 const low = require("lowdb");
 const FileSync = require("lowdb/adapters/FileSync");
 
@@ -22,28 +14,14 @@ db._.mixin(lodashId);
 app.use(cors());
 app.use(express.json());
 
-/*const initializePassport = require('./passport-config')
-initializePassport(
-  passport,
-  email => users.find(user => user.email === email),
-  id => users.find(user => user.id === id)
-)
+app.get("/api/organizations", async (req, res) => {
+  const data = db.get('organizations').value()
 
-const users = []
-
-//app.use(express.urlencoded({ extended: false }))
-app.use(flash())
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false
-}))
-app.use(passport.initialize())
-app.use(passport.session())
-app.use(methodOverride('_method'))*/
+  res.json(data)
+})
 
 app.post('/api/login-user', async (req, res) => {
-  const user = db.get('users').find(user => user.name === req.body.name).value()
+  const user = db.get('users').find(user => user.email === req.body.email).value()
   if (user == null) {
     return res.status(400).send('Cannot find user')
   }
@@ -51,7 +29,7 @@ app.post('/api/login-user', async (req, res) => {
     if(req.body.password === user.password) {
       res.send('Success')
     } else {
-      res.send('Not Allowed')
+      res.status(403).send('Not Allowed')
     }
   } catch {
     res.status(500).send()
@@ -76,20 +54,5 @@ app.post("/api/organizations", async (req, res) => {
     res.status(500).send();
   }
 });
-
-/*function checkAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next()
-  }
-
-  res.redirect('/login')
-}
-
-function checkNotAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    return res.redirect('/')
-  }
-  next()
-}*/
 
 app.listen(3001);

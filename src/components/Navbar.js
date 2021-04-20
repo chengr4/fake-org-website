@@ -8,7 +8,6 @@ import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
   appbar: {
-
   },
   title: {
     flexGrow: 1,
@@ -21,10 +20,10 @@ const Navbar = ({path}) => {
   return (
     <AppBar position="static" className={classes.appbar} color="transparent" elevation={0}>
         <Toolbar>
-          <Typography variant="h6" className={classes.title}>
+          <Typography variant="h6" className={classes.title} color="secondary">
             Vynca
           </Typography>
-          <Button component={Link} to={"/"+path} color="secondary">{path}</Button>
+          <Button component={Link} to={"/"+path} >{path}</Button>
         </Toolbar>
       </AppBar>
   );

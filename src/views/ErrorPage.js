@@ -1,6 +1,8 @@
 import Typography from "@material-ui/core/Typography";
+import Container from "@material-ui/core/Container";
 import { Link } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
+import Navbar from "../components/Navbar";
 
 const useStyles = makeStyles((theme) => ({
   error: {
@@ -14,12 +16,13 @@ const ErrorPage = () => {
   const classes = useStyles();
 
   return (
-    <div className={classes.error}>
+    <Container className={classes.error}>
+      <Navbar path="login" />
       <Typography variant="h2" gutterBottom color="secondary">
         An error occured
       </Typography>
       <Link to="/">Back to the homepage...</Link>
-    </div>
+    </Container>
   );
 };
 

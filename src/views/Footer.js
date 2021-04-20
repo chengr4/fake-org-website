@@ -1,7 +1,7 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
+import Box from '@material-ui/core/Box';
 import Link from '@material-ui/core/Link';
 
 function Copyright() {
@@ -30,11 +30,9 @@ export default function StickyFooter() {
   const classes = useStyles();
 
   return (
-      <footer className={classes.footer}>
-        <Container maxWidth="sm">
+        <Box component='footer' maxWidth="sm" className={classes.footer}>
           <Typography variant="body1">Powered by Vynca</Typography>
           <Copyright />
-        </Container>
-      </footer>
+        </Box>
   );
 }

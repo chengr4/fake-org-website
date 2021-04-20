@@ -5,41 +5,57 @@ import { Container, FormLabel } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { Link, useHistory } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
+import Navbar from "../components/Navbar";
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+  btn: {
+    display: "flex",
+    alignItems: 'stretch',
+  },
+});
+
+
 
 const RegistrationPage = () => {
-  const [name, setName] = useState('');
+  const classes = useStyles();
+
+  const [name, setName] = useState("");
   const [address, setAddress] = useState({
-    street: '',
-    apt: '',
-    city: '',
-    state: '',
-    zipcode: ''
+    street: "",
+    apt: "",
+    city: "",
+    state: "",
+    zipcode: "",
   });
+
   const history = useHistory();
 
   const handleSubmit = (e) => {
     // prevent the page from being refesh
     e.preventDefault();
 
-    const organizationData = {name, address};
-    console.log(organizationData); 
+    const organizationData = { name, address };
+    console.log(organizationData);
 
-    axios.post('http://localhost:3001/api/organizations', organizationData, {
-      headers: { "Content-Type": "application/json" }
-    })
-    .then( (response) => {
-      console.log(response);
-      history.push('/login');
-    })
-    .catch(function (error) {
-      console.log(error);
-      history.push('/error');
-    });
+    axios
+      .post("http://localhost:3001/api/organizations", organizationData, {
+        headers: { "Content-Type": "application/json" },
+      })
+      .then((response) => {
+        console.log(response);
+        history.push("/login");
+      })
+      .catch(function (error) {
+        console.log(error);
+        history.push("/error");
+      });
   };
 
   return (
     <Container>
+      <Navbar  path="organizations"/>
       <form onSubmit={handleSubmit}>
         <Typography variant="h6" gutterBottom>
           CREATE ORGANIZATION
@@ -55,7 +71,7 @@ const RegistrationPage = () => {
               label="Organization name"
               fullWidth
               value={name}
-              onChange={ e => setName(e.target.value)}
+              onChange={(e) => setName(e.target.value)}
             />
           </Grid>
           <Grid item xs={12}>
@@ -78,8 +94,8 @@ const RegistrationPage = () => {
               fullWidth
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
-            <Button variant="contained" fullWidth>
+          <Grid item xs={12} sm={6} className={classes.btn}>
+            <Button variant="contained" fullWidth >
               ADD MORE MSH.4 VALUE
             </Button>
           </Grid>
@@ -123,9 +139,9 @@ const RegistrationPage = () => {
               label="Street"
               fullWidth
               value={address.street}
-              onChange={(e)=> {
-                setAddress(prevAddress => {
-                  return {...prevAddress, street: e.target.value};
+              onChange={(e) => {
+                setAddress((prevAddress) => {
+                  return { ...prevAddress, street: e.target.value };
                 });
               }}
             />
@@ -140,9 +156,9 @@ const RegistrationPage = () => {
               fullWidth
               autoComplete="shipping address-line2"
               value={address.apt}
-              onChange={(e)=> {
-                setAddress(prevAddress => {
-                  return {...prevAddress, apt: e.target.value};
+              onChange={(e) => {
+                setAddress((prevAddress) => {
+                  return { ...prevAddress, apt: e.target.value };
                 });
               }}
             />
@@ -157,9 +173,9 @@ const RegistrationPage = () => {
               fullWidth
               autoComplete="shipping address-level2"
               value={address.city}
-              onChange={(e)=> {
-                setAddress(prevAddress => {
-                  return {...prevAddress, city: e.target.value};
+              onChange={(e) => {
+                setAddress((prevAddress) => {
+                  return { ...prevAddress, city: e.target.value };
                 });
               }}
             />
@@ -173,9 +189,9 @@ const RegistrationPage = () => {
               label="State"
               fullWidth
               value={address.state}
-              onChange={(e)=> {
-                setAddress(prevAddress => {
-                  return {...prevAddress, state: e.target.value};
+              onChange={(e) => {
+                setAddress((prevAddress) => {
+                  return { ...prevAddress, state: e.target.value };
                 });
               }}
             />
@@ -189,24 +205,20 @@ const RegistrationPage = () => {
               label="Zipcode"
               fullWidth
               value={address.zipcode}
-              onChange={(e)=> {
-                setAddress(prevAddress => {
-                  return {...prevAddress, zipcode: e.target.value};
+              onChange={(e) => {
+                setAddress((prevAddress) => {
+                  return { ...prevAddress, zipcode: e.target.value };
                 });
               }}
             />
           </Grid>
         </Grid>
-        <Button
-        component={Link}
-        to="/organizations"
-        variant="contained"
-      >
-        cancel
-      </Button>
-      <Button type="submit" variant="contained" color="primary">
-        create
-      </Button>
+        <Button component={Link} to="/organizations" variant="contained">
+          cancel
+        </Button>
+        <Button type="submit" variant="contained" color="primary">
+          create
+        </Button>
       </form>
     </Container>
   );
