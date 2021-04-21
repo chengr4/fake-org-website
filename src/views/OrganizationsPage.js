@@ -45,15 +45,15 @@ const OrganizationsPage = () => {
       <Typography component="h2" variant="h6" color="primary" gutterBottom>
         Organizations
       </Typography>
-      <Button component={Link} to="/registration" variant="contained">
-        CREACTE NEW ACCOUNT
-      </Button>
       {isPending && (
         <Typography component="h2" variant="h6" color="secondary" gutterBottom>
           Loading...
         </Typography>
       )}
       {organizations && <OrganizationList organizations={organizations} />}
+      <Button component={Link} to="/registration" variant="contained">
+        CREACTE NEW ACCOUNT
+      </Button>
     </Container>
   );
 };
