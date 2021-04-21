@@ -7,28 +7,45 @@
 **Server**
 ```
 cd server
+yarn install
+
+or
+
+cd server 
 npm install
 ```
-**Client**
 
+**Client**
 ```
+yarn install
+
+or
+
 npm install
 ```
 
 ### Step2: Run both server and client
 
 **Server**
-
 ```
 // in server folder
+yarn run dev-start
+
+or
+
 npm run dev-start
 ```
 
 **Client**
-
 ```
+yarn start
+
+or
+
 npm start
 ```
+
+### Step3: Start to use
 
 ## About authentication
 
@@ -36,7 +53,7 @@ Email: admin@test.com
 
 Password: password123
 
-> You can change it in db.json
+> You can change it in `server/db.json`
 
 ## Questions
 
