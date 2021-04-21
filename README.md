@@ -8,19 +8,21 @@
 ```
 cd server
 yarn install
-
+```
 or
-
+```
 cd server 
 npm install
 ```
 
 **Client**
 ```
+cd client
 yarn install
-
+```
 or
-
+```
+cd client
 npm install
 ```
 
@@ -30,18 +32,21 @@ npm install
 ```
 // in server folder
 yarn run dev-start
-
+```
 or
-
+```
+// in server folder
 npm run dev-start
 ```
 
 **Client**
 ```
+// in client folder
 yarn start
-
+```
 or
-
+```
+// in client folder
 npm start
 ```
 
