@@ -26,11 +26,8 @@ const OrganizationsPage = () => {
     axios
       .get("http://localhost:3001/api/organizations")
       .then((res) => {
-        return res.data;
-      })
-      .then((data) => {
         setIsPending(false);
-        setOrganizations(data);
+        setOrganizations(res.data);
       })
       .catch(function (error) {
         // handle error
